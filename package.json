@@ -1,0 +1,21 @@
+{
+  "name": "astricon-2012",
+  "version": "0.0.1",
+  "description": "An example app for Astricon 2012",
+  "main": "server.js",
+  "dependencies": {
+    "asterisk-ami": "~0.0.8"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "nodejs",
+    "asterisk",
+    "astricon",
+    "example"
+  ],
+  "author": "Dan Jenkins",
+  "license": "BSD"
+}
