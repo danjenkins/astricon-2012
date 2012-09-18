@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <title>Astricon 2012</title>
+    <script type="text/javascript" src="http://localhost:8080/nowjs/now.js"></script>
+
+    <script type="text/javascript">
+      var output = function(data){
+        var html = '<div>' + (data instanceof Object ? JSON.stringify(data) : data) + '</div>';
+        var div = document.getElementById('output');
+        div.innerHTML = html + div.innerHTML;
+      }
+
+      now.echoAsteriskData = function(data){
+        output(data);
+      }
+
+      now.ready(function(){
+        output('connected via nowjs');
+      });
+    </script>
+  </head>
+  <body>
+    <!--Bootstrap it up-->
+    <div id="output">
+
+    </div>
+  </body>
+</html>
