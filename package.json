@@ -5,7 +5,7 @@
   "main": "server.js",
   "dependencies": {
     "asterisk-ami": "~0.0.8",
-    "now": ""
+    "now": "~0.8.1"
   },
   "devDependencies": {},
   "scripts": {
