@@ -4,7 +4,8 @@
   "description": "An example app for Astricon 2012",
   "main": "server.js",
   "dependencies": {
-    "asterisk-ami": "~0.0.8"
+    "asterisk-ami": "~0.0.8",
+    "now": ""
   },
   "devDependencies": {},
   "scripts": {
