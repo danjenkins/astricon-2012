@@ -5,7 +5,7 @@ var express = require('express');
 var http = require('http');
 
 
-var ami = new AsteriskAmi( { host: '172.16.172.132', username: 'astricon', password: 'secret'} );
+var ami = new AsteriskAmi( { host: '172.16.172.130', username: 'astricon', password: 'secret'} );
 var app = express();
 var server = http.createServer(app).listen(8080, function(){
   console.log('listening on http://localhost:8080');
@@ -27,18 +27,31 @@ app.get('/', function(req, res) {
 
 var everyone = nowjs.initialize(server);
 
+everyone.now.send_data_to_asterisk = function(data){
+  ami.send(data);
+}
+
 ami.on('ami_data', function(data){
-  if(everyone.now.echoAsteriskData instanceof Function){
-    everyone.now.echoAsteriskData(data);
+  if(data.event){
+    switch(data.event){
+      case 'Pong':
+        events.pong(data);
+      break;
+    }
   }
 });
 
 ami.connect(function(response){
   console.log('connected to the AMI');
-  setInterval(function(){
-    ami.send({action: 'Ping'});//run a callback event when we have connected to the socket
-  }, 2000);
 });
+
+var events = {
+  pong: function(data){
+    if(everyone.now.echoAsteriskData instanceof Function){
+      everyone.now.echoAsteriskData(data);//calls a function on the browser
+    }
+  }
+}
 
 process.on('SIGINT', function () {
   ami.disconnect();
