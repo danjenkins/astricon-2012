@@ -7,7 +7,10 @@ ami.on('ami_data', function(data){
 });
 
 ami.connect(function(response){
-  ami.send({action: 'Ping'});//run a callback event when we have connected to the socket
+  console.log('connected to the AMI');
+  setInterval(function(){
+    ami.send({action: 'Ping'});//run a callback event when we have connected to the socket
+  }, 2000);
 });
 
 process.on('SIGINT', function () {
