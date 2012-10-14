@@ -97,15 +97,7 @@
         }else if($(this).is('.unpause')){
           now.send_data_to_asterisk({action: 'QueuePause', queue: '10', interface: 'sip/2000', paused: false});
         }else if($(this).is('.dial')){
-          now.send_data_to_asterisk({
-            action: 'originate',
-            channel: 'SIP/1000',
-            exten: 10,
-            context: 'from-internal',
-            priority : 1,
-            async: true,
-            callerid: '1000 VIA AMI "1000"'
-          });
+          now.send_data_to_asterisk({ action: 'originate', channel: 'SIP/1000', exten: 10, context: 'from-internal', priority : 1, async: true,callerid: '1000 VIA AMI "1000"' });
         }else if($(this).is('.logout')){
           now.send_data_to_asterisk({action: 'QueueRemove', queue: '10', interface: 'sip/2000'});
         }
