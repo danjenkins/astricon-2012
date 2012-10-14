@@ -5,7 +5,7 @@ var express = require('express');
 var http = require('http');
 
 
-var ami = new AsteriskAmi( { host: '172.16.172.132', username: 'astricon', password: 'secret'} );
+var ami = new AsteriskAmi( { host: '172.16.172.130', username: 'astricon', password: 'secret'} );
 var app = express();
 var server = http.createServer(app).listen(8080, function(){
   console.log('listening on http://localhost:8080');
