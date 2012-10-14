@@ -47,10 +47,20 @@
     </div>
 
     <div class="container">
+      
+      <p>
+        <button class="btn btn-large btn-primary help" type="button">Help</button>
+        <button class="btn btn-large btn-success reload" type="button">Reload</button>
+        <button class="btn btn-large btn-danger login" type="button">Log Extension 2000 into Queue 10 in paused state</button>
+        <button class="btn btn-large btn-danger unpause" type="button">Unpause extension 2000 in Queue 10</button>
+        <button class="btn btn-large btn-info dial" type="button">Dial Queue 10 From  Extension 1000</button>
+        <button class="btn btn-large btn-danger logout" type="button">Log Extension 2000 out of Queue 10</button>
+      </p>
+
       <div id="output" class="well well-large">
 
       </div>
-      
+
       <hr>
 
       <footer>
@@ -60,12 +70,13 @@
     </div> <!-- /container -->
 
     <script type="text/javascript" src="/nowjs/now.js"></script>
+    <script type="text/javascript" src="../assets/js/jquery.js"></script>
 
     <script type="text/javascript">
       var output = function(data){
         var html = '<div>' + (data instanceof Object ? JSON.stringify(data) : data) + '</div>';
         var div = document.getElementById('output');
-        div.innerHTML = html + div.innerHTML;
+        div.innerHTML = html + '<br />' +  div.innerHTML;
       }
 
       now.echoAsteriskData = function(data){
@@ -75,6 +86,31 @@
       now.ready(function(){
         output('connected via nowjs');
       });
+
+      $('.btn').click(function(e){
+        if($(this).is('.help')){
+          now.send_data_to_asterisk({action: 'ListCommands'});
+        }else if($(this).is('.reload')){
+          now.send_data_to_asterisk({action: 'reload'});
+        }else if($(this).is('.login')){
+          now.send_data_to_asterisk({action: 'QueueAdd', queue: '10', interface: 'sip/2000', penalty: 1, paused: true});
+        }else if($(this).is('.unpause')){
+          now.send_data_to_asterisk({action: 'QueuePause', queue: '10', interface: 'sip/2000', paused: false});
+        }else if($(this).is('.dial')){
+          now.send_data_to_asterisk({
+            action: 'originate',
+            channel: 'SIP/1000',
+            exten: 10,
+            context: 'from-internal',
+            priority : 1,
+            async: true,
+            callerid: '1000 VIA AMI "1000"'
+          });
+        }else if($(this).is('.logout')){
+          now.send_data_to_asterisk({action: 'QueueRemove', queue: '10', interface: 'sip/2000'});
+        }
+        e.preventDefault();
+      })
     </script>
 
   </body>
