@@ -15,4 +15,5 @@ ami.connect(function(response){
 
 process.on('SIGINT', function () {
   ami.disconnect();
+  process.exit(0);
 });
