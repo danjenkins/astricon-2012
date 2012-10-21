@@ -88,19 +88,21 @@
       });
 
       $('.btn').click(function(e){
+        var obj = {};
         if($(this).is('.help')){
-          now.send_data_to_asterisk({action: 'ListCommands'});
+          obj = {action: 'ListCommands'};
         }else if($(this).is('.reload')){
-          now.send_data_to_asterisk({action: 'reload'});
+          obj = {action: 'reload'};
         }else if($(this).is('.login')){
-          now.send_data_to_asterisk({action: 'QueueAdd', queue: '10', interface: 'sip/2000', penalty: 1, paused: true});
+          obj = {action: 'QueueAdd', queue: '10', interface: 'sip/2000', penalty: 1, paused: true};
         }else if($(this).is('.unpause')){
-          now.send_data_to_asterisk({action: 'QueuePause', queue: '10', interface: 'sip/2000', paused: false});
+          obj = {action: 'QueuePause', queue: '10', interface: 'sip/2000', paused: false};
         }else if($(this).is('.dial')){
-          now.send_data_to_asterisk({ action: 'originate', channel: 'SIP/1000', exten: 10, context: 'from-internal', priority : 1, async: true,callerid: '1000 VIA AMI "1000"' });
+          obj = { action: 'originate', channel: 'SIP/1000', exten: 10, context: 'from-internal', priority : 1, async: true, callerid: '1000 VIA AMI "1000"' };
         }else if($(this).is('.logout')){
-          now.send_data_to_asterisk({action: 'QueueRemove', queue: '10', interface: 'sip/2000'});
+          obj = {action: 'QueueRemove', queue: '10', interface: 'sip/2000'};
         }
+        now.send_data_to_asterisk(obj);
         e.preventDefault();
       })
     </script>
