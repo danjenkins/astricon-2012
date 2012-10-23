@@ -1,6 +1,6 @@
 var AsteriskAmi = require('asterisk-ami');
 
-var ami = new AsteriskAmi( { host: '172.16.172.135', username: 'astricon', password: 'secret' } );
+var ami = new AsteriskAmi( { host: '172.16.172.136', username: 'astricon', password: 'secret' } );
 
 ami.on('ami_data', function(data){
   console.log('AMI DATA', data);
